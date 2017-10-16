@@ -1,0 +1,323 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "TagChatter API",
+    "contact": {
+      "email": "team@tagview.com.br"
+    }
+  },
+  "host": "tagchatter.herokuapp.com",
+  "externalDocs": {
+    "description": "Instruções",
+    "url": "https://gitlab.com/tagview/entrevista-front-end"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "tags": [
+    {
+      "name": "user"
+    },
+    {
+      "name": "channel"
+    },
+    {
+      "name": "message"
+    }
+  ],
+  "paths": {
+    "/me": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Retorna os dados do User autenticado",
+        "responses": {
+          "200": {
+            "description": "Operação bem sucedida",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Retorna uma lista com todos os Users",
+        "responses": {
+          "200": {
+            "description": "Operação bem sucedida",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/channels": {
+      "get": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Retorna uma lista com todos os Channels",
+        "responses": {
+          "200": {
+            "description": "Operação bem sucedida",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Channel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/channels/{channelId}/messages": {
+      "get": {
+        "tags": [
+          "channel",
+          "message"
+        ],
+        "summary": "Retorna uma lista com todas as Messages do Channel especificado",
+        "parameters": [
+          {
+            "name": "channelId",
+            "description": "ID do Channel",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem sucedida",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Message"
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/responses/ChannelNotFoundError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "channel",
+          "message"
+        ],
+        "summary": "Envia uma Message para o Channel especificado",
+        "parameters": [
+          {
+            "name": "channelId",
+            "description": "ID do Channel",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Message",
+            "in": "body",
+            "description": "Mensagem a ser enviada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "message": "Hello World!"
+              },
+              "required": [
+                "message"
+              ]
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem sucedida",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/MissingPropertyError"
+          },
+          "404": {
+            "$ref": "#/responses/ChannelNotFoundError"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "ChannelNotFoundError": {
+      "description": "O Channel informado não existe",
+      "schema": {
+        "example": {
+          "type": "channel_not_found",
+          "error": "Channel not found",
+          "channel": "invalid_id"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ResponseError"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "channel_not_found"
+                ]
+              },
+              "channel": {
+                "description": "ID do Channel não encontrado",
+                "type": "string"
+              }
+            },
+            "required": [
+              "channel"
+            ]
+          }
+        ]
+      }
+    },
+    "MissingPropertyError": {
+      "description": "Um parâmetro requerido não foi informado",
+      "schema": {
+        "example": {
+          "type": "missing_property",
+          "error": "Property \"message\" is required",
+          "properties": [
+            "message"
+          ]
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ResponseError"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "missing_property"
+                ]
+              },
+              "properties": {
+                "description": "Nome das propriedades que são requeridas mas estão ausentes",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "properties"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "example": {
+        "id": "us3r",
+        "name": "John Doe"
+      }
+    },
+    "Channel": {
+      "description": "Um grupo de Users",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "example": {
+        "id": "ch4nn3l",
+        "name": "VIP"
+      }
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "content"
+      ],
+      "example": {
+        "id": "m3ss4g3",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      }
+    },
+    "ResponseError": {
+      "description": "Estrutura básica de todos os erros",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "O identificador do erro",
+          "type": "string",
+          "enum": [
+            "channel_not_found",
+            "missing_property"
+          ]
+        },
+        "error": {
+          "type": "string",
+          "description": "Uma descrição breve do erro"
+        }
+      },
+      "required": [
+        "type",
+        "error"
+      ]
+    }
+  }
+}

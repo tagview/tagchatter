@@ -1,7 +1,9 @@
 const port = process.env.PORT || 3000;
+const apiDocs = require("./swagger.json");
 
 const http = require("http");
 const express = require("express");
+const swaggerUi = require("swagger-ui-express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const uuid = require("uuid/v4");
@@ -69,6 +71,8 @@ app.post("/channels/:id/messages", (req, res) => {
     res.status(404).json({ type: "channel_not_found", error: "Channel not found", channel: id });
   }
 });
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(apiDocs));
 
 const server = http.createServer(app);
 

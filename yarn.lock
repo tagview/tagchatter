@@ -593,6 +593,10 @@ swagger-express@^1.0.5:
     js-yaml "~2.1.0"
     underscore "*"
 
+swagger-ui-express@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/swagger-ui-express/-/swagger-ui-express-2.0.8.tgz#94198e79a38fd9d2e05d85beb465e8ce0467cf64"
+
 type-is@~1.6.15:
   version "1.6.15"
   resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.15.tgz#cab10fb4909e441c82842eafe1ad646c81804410"
