@@ -2,7 +2,6 @@ const port = process.env.PORT || 3000;
 
 const http = require("http");
 const express = require("express");
-const { Server: WebSocket } = require("ws");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const uuid = require("uuid/v4");
@@ -37,7 +36,7 @@ app.get("/me", (req, res) => res.json(me));
 
 app.get("/users", (req, res) => res.json(users));
 
-app.get("/channels", (req, res) => 
+app.get("/channels", (req, res) =>
   res.json(channels.map(pick(["id", "name"]))));
 
 app.get("/channels/:id/messages", (req, res) => {
@@ -72,12 +71,5 @@ app.post("/channels/:id/messages", (req, res) => {
 });
 
 const server = http.createServer(app);
-
-const wss = new WebSocket({ server });
-
-wss.on("connection", ws => {
-  const ping = setInterval(() => ws.send(JSON.stringify(new Date())), 1000 * 10);
-  ws.on("close", () => clearInterval(ping));
-});
 
 server.listen(port, () => console.log("App listening on port", port));
