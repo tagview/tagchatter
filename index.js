@@ -84,9 +84,17 @@ app.post("/channels/:id/messages", (req, res) => {
     channel.messages.push(message);
     res.json(message);
   } else if (isBlank(req.body.message)) {
-    res.status(400).json({ type: "missing_property", error: `Property "message" is required`, properties: ["message"] });
+    res.status(400).json({
+      type: "missing_property",
+      error: `Property "message" is required`,
+      properties: ["message"],
+    });
   } else if (isBlank(req.body.author_id)) {
-    res.status(400).json({ type: "missing_property", error: `Property "author_id" is required`, properties: ["author_id"] });
+    res.status(400).json({
+      type: "missing_property",
+      error: `Property "author_id" is required`,
+      properties: ["author_id"],
+    });
   } else if (isBlank(user)) {
     res.status(404).json({ type: "user_not_found", error: "User not found", user: userId });
   } else {
