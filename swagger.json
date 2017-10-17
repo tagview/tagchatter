@@ -367,7 +367,8 @@
       "required": [
         "id",
         "content",
-        "created_at"
+        "created_at",
+        "author"
       ],
       "example": {
         "id": "m3ss4g3",
