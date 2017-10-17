@@ -84,7 +84,7 @@
         "tags": [
           "channel"
         ],
-        "summary": "Retorna uma lista com todas as Messages do Channel especificado, em ordem decrescente de data de criação",
+        "summary": "Retorna uma lista com todas as Messages do Channel especificado, em ordem crescente de data de criação",
         "parameters": [
           {
             "name": "channelId",
