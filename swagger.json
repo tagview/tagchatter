@@ -13,8 +13,8 @@
     "url": "https://gitlab.com/tagview/entrevista-front-end"
   },
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ],
   "tags": [
     {
