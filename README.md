@@ -47,6 +47,7 @@ Nossa análise vai além do resultado final então se você tiver um problema im
 - Fidelidade ao layout proposto
 - Tratamento de erros
 - Organização do repositório
-- Empenho em entregar algo, mesmo que minimamente funcional.
+- Atenção aos [requisitos](#requisitos)
+- Empenho em entregar algo, mesmo que minimamente funcional
 
 Caso tenha dúvidas, envie um e-mail para `team@tagview.com.br`
