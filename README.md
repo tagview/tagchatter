@@ -13,7 +13,7 @@ A ideia é que você desenvolva uma aplicação onde usuários conseguem convers
 ### Requisitos
 - A lista de mensagens do channel que o usuário está visualizando deve ser atualizada a cada 3 segundos
 - Ao acessar um channel o usuário deve visualizar a listagem atualizada de mensagens
-- O request para enviar mensagens (`POST /channels/:channelId/messages`) falha *intencionalmente* em 75% das vezes com um erro 500, você pode desabilitar isso passando o parâmetro `stable` mas idealmente você deve implementar uma solução que trate esses erros aleatórios, permitindo que o usuário tente enviar a mensagem novamente. Consulte [a documentação da API](https://tagchatter.herokuapp.com/docs/#/channel/post_channels__channelId__messages) para mais detalhes.
+- O request para enviar mensagens (`POST /channels/:channelId/messages`) falha *intencionalmente* em 25% das vezes com um erro 500, você pode desabilitar isso passando o parâmetro `stable` mas idealmente você deve implementar uma solução que trate esses erros aleatórios, permitindo que o usuário tente enviar a mensagem novamente. Consulte [a documentação da API](https://tagchatter.herokuapp.com/docs/#/channel/post_channels__channelId__messages) para mais detalhes.
 
 ### Linguagens aceitas
 Você pode usar as bibliotecas e frameworks que preferir desde que a linguagem de programação esteja entre:
