@@ -22,9 +22,6 @@
     },
     {
       "name": "channel"
-    },
-    {
-      "name": "message"
     }
   ],
   "paths": {
@@ -85,8 +82,7 @@
     "/channels/{channelId}/messages": {
       "get": {
         "tags": [
-          "channel",
-          "message"
+          "channel"
         ],
         "summary": "Retorna uma lista com todas as Messages do Channel especificado, em ordem decrescente de data de criação",
         "parameters": [
@@ -115,8 +111,7 @@
       },
       "post": {
         "tags": [
-          "channel",
-          "message"
+          "channel"
         ],
         "summary": "Envia uma Message para o Channel especificado",
         "parameters": [
