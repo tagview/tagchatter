@@ -31,7 +31,19 @@ const buildMessage = ({ id, content, author, created_at } = {}) => ({
   created_at: created_at || faker.date.past(),
 });
 
-const users = times(buildUser, 10);
+const users = [
+    "laverne_jacobi11",
+    "noelia_christiansen",
+    "kevin_heaney",
+    "ulises.rath",
+    "mona_mueller",
+    "elinor.klein17",
+    "gunnar_gerhold",
+    "ramona_davis74",
+    "gerald47",
+    "kieran56",
+  ].map(id => buildUser({ id }));
+
 const channels = [
     ["general", "Geral"],
     ["random", "Random"],
