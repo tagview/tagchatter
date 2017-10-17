@@ -109,7 +109,7 @@
             }
           },
           "404": {
-            "$ref": "#/responses/ChannelNotFoundError"
+            "$ref": "#/responses/NotFoundError"
           }
         }
       },
@@ -128,21 +128,27 @@
             "type": "string"
           },
           {
-            "name": "Message",
+            "name": "body",
             "in": "body",
-            "description": "Mensagem a ser enviada",
             "schema": {
               "type": "object",
               "properties": {
                 "message": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "A mensagem a ser enviada"
+                },
+                "author_id": {
+                  "type": "string",
+                  "description": "O ID do User autor da mensagem"
                 }
               },
               "example": {
-                "message": "Hello World!"
+                "message": "Hello World!",
+                "author_id": "us3r"
               },
               "required": [
-                "message"
+                "message",
+                "author_id"
               ]
             },
             "required": true
@@ -159,20 +165,20 @@
             "$ref": "#/responses/MissingPropertyError"
           },
           "404": {
-            "$ref": "#/responses/ChannelNotFoundError"
+            "$ref": "#/responses/NotFoundError"
           }
         }
       }
     }
   },
   "responses": {
-    "ChannelNotFoundError": {
-      "description": "O Channel informado não existe",
+    "UserNotFoundError": {
+      "description": "O User informado não existe",
       "schema": {
         "example": {
-          "type": "channel_not_found",
-          "error": "Channel not found",
-          "channel": "invalid_id"
+          "type": "user_not_found",
+          "error": "User not found",
+          "user": "invalid_id"
         },
         "allOf": [
           {
@@ -184,17 +190,43 @@
               "type": {
                 "type": "string",
                 "enum": [
-                  "channel_not_found"
+                  "user_not_found"
                 ]
               },
-              "channel": {
-                "description": "ID do Channel não encontrado",
+              "user": {
+                "description": "ID do User não encontrado",
                 "type": "string"
               }
             },
             "required": [
-              "channel"
+              "user"
             ]
+          }
+        ]
+      }
+    },
+    "NotFoundError": {
+      "description": "Não encontrado",
+      "schema": {
+        "example": {
+          "type": "channel_not_found",
+          "error": "Channel not found"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ResponseError"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "channel_not_found",
+                  "user_not_found"
+                ]
+              }
+            }
           }
         ]
       }
@@ -247,15 +279,21 @@
         },
         "name": {
           "type": "string"
+        },
+        "avatar": {
+          "type": "string",
+          "description": "O URL da foto do usuário"
         }
       },
       "required": [
         "id",
-        "name"
+        "name",
+        "avatar"
       ],
       "example": {
         "id": "us3r",
-        "name": "John Doe"
+        "name": "John Doe",
+        "avatar": "https://example.com/us3r.jpg"
       }
     },
     "Channel": {
@@ -286,15 +324,24 @@
         },
         "content": {
           "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "A data de criação da mensagem no formato ISO 8601"
+        },
+        "author": {
+          "$ref": "#/definitions/User"
         }
       },
       "required": [
         "id",
-        "content"
+        "content",
+        "created_at"
       ],
       "example": {
         "id": "m3ss4g3",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "created_at": "2017-10-17T12:09:07.997Z"
       }
     },
     "ResponseError": {
@@ -306,6 +353,7 @@
           "type": "string",
           "enum": [
             "channel_not_found",
+            "user_not_found",
             "missing_property"
           ]
         },

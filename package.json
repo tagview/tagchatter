@@ -7,10 +7,12 @@
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "express": "^4.15.3",
+    "faker": "^4.1.0",
     "ramda": "^0.24.1",
     "ramda-fantasy": "^0.8.0",
     "swagger-express": "^1.0.5",
     "swagger-ui-express": "^2.0.8",
+    "titleize": "^1.0.0",
     "uuid": "^3.1.0"
   },
   "scripts": {
