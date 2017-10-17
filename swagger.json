@@ -88,7 +88,7 @@
           "channel",
           "message"
         ],
-        "summary": "Retorna uma lista com todas as Messages do Channel especificado",
+        "summary": "Retorna uma lista com todas as Messages do Channel especificado, em ordem decrescente de data de criação",
         "parameters": [
           {
             "name": "channelId",

@@ -43,7 +43,8 @@ const channels = [
   .map(([id, name]) => ({
     id,
     name,
-    messages: times(() => buildMessage({ author: faker.random.arrayElement(users) }), 5),
+    messages: times(() => buildMessage({ author: faker.random.arrayElement(users) }), 5)
+      .sort((a, b) => b.created_at - a.created_at),
   }));
 
 app.use(cors());
