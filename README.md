@@ -8,7 +8,7 @@ Estamos empolgados que você se interessou em fazer parte da equipe Tagview! Mon
 
 ## Implementação
 
-A ideia é que você desenvolva uma aplicação onde usuários conseguem conversar entre si através de channels (grupos). Os dados devem ser obtidos através da [API](#api) e a interface deve seguir o [layout proposto](#layout).
+A ideia é que você desenvolva uma aplicação (site ou aplicativo móvel) onde usuários conseguem conversar entre si através de channels (grupos). Os dados devem ser obtidos através da [API](#api) e a interface deve seguir o [layout proposto](#layout).
 
 ### Requisitos
 - A lista de mensagens do channel que o usuário está visualizando deve ser atualizada a cada 3 segundos
