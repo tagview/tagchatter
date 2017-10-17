@@ -31,12 +31,12 @@ Desenvolvemos uma API REST que deve ser usada para obter os dados dos usuários,
 Você pode acessar as informações detalhadas e testar os endpoints acessando [tagchatter.herokuapp.com/docs](https://tagchatter.herokuapp.com/docs/)
 
 ### Layout
-A fonte usada em todos componentes é a [Lato](https://fonts.google.com/specimen/Lato) e os ícones que você vai precisar estão em [assets](layout/assets).
+Os arquivos do layout estão na [pasta `layout`](layout). A fonte usada em todos componentes é a [Lato](https://fonts.google.com/specimen/Lato) e os ícones que você vai precisar estão em [assets](layout/assets).
 
 ## Submissão
 Nos envie o URL de um repositório git público. Usamos bastante do [GitLab](https://gitlab.com) e o [GitHub](https://github.com).
 
-**:warning: Não esqueça de adicionar as instruções de como executar o seu projeto **
+:warning: **Não esqueça de adicionar as instruções de como executar o seu projeto**
 
 ## Boa Sorte!
 Nossa análise vai além do resultado final então se você tiver um problema implementando algum detalhe nos envie a sua solução mesmo assim.
@@ -48,4 +48,4 @@ Nossa análise vai além do resultado final então se você tiver um problema im
 - Organização do repositório
 - Empenho em entregar algo, mesmo que minimamente funcional.
 
-Caso tenha dúvidas, envie um e-mail para team@tagview.com.br
+Caso tenha dúvidas, envie um e-mail para `team@tagview.com.br`
