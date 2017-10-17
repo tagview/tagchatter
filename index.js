@@ -20,7 +20,7 @@ const app = express();
 
 const buildUser = ({ id, name, avatar } = {}) => ({
   id: isPresent(id) ? toId(id) : uuid(),
-  name: name || titleize(faker.fake("{{hacker.adjective}}  {{name.firstName}}")),
+  name: name || titleize(faker.fake("{{hacker.adjective}} {{name.firstName}}")),
   avatar: avatar || faker.image.avatar(),
 });
 
