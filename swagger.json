@@ -373,7 +373,12 @@
       "example": {
         "id": "m3ss4g3",
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "created_at": "2017-10-17T12:09:07.997Z"
+        "created_at": "2017-10-17T12:09:07.997Z",
+        "author": {
+          "id": "us3r",
+          "name": "John Doe",
+          "avatar": "https://example.com/us3r.jpg"
+        }
       }
     },
     "ResponseError": {
