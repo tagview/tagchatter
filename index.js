@@ -1,5 +1,6 @@
 const port = process.env.PORT || 3000;
 const apiDocs = require("./swagger.json");
+const successPercentage = parseFloat(process.env.SUCCESS_PERCENTAGE) || 0.75;
 
 const http = require("http");
 const express = require("express");
@@ -11,6 +12,7 @@ const { all, isNil, isEmpty, pick, prop, propEq, takeLast, times } = require("ra
 const { Maybe } = require("ramda-fantasy");
 const faker = require("faker");
 const titleize = require("titleize");
+const random = require("random-js");
 
 const isPresent = val => !isNil(val) && !isEmpty(val);
 const isBlank = val => !isPresent(val);
@@ -90,11 +92,16 @@ app.post("/channels/:id/messages", (req, res) => {
   const userId = toId(req.body.author_id);
   const channel = channels.find(propEq("id", channelId));
   const user = users.find(propEq("id", userId));
+  const shouldSucceed = /true/i.test(req.query.stable) || random.bool(successPercentage)(random.engines.nativeMath)
 
   if (all(isPresent, [channel, user, req.body.message])) {
-    const message = buildMessage({ content: req.body.message, author: user, created_at: new Date() });
-    channel.messages.push(message);
-    res.json(message);
+    if (shouldSucceed) {
+      const message = buildMessage({ content: req.body.message, author: user, created_at: new Date() });
+      channel.messages.push(message);
+      res.json(message);
+    } else {
+      res.status(500).json({ type: "internal_error", error: "Unexpected error" });
+    }
   } else if (isBlank(req.body.message)) {
     res.status(400).json({
       type: "missing_property",

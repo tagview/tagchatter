@@ -114,6 +114,7 @@
           "channel"
         ],
         "summary": "Envia uma Message para o Channel especificado",
+        "description": "## ATENÇÃO: Esse request falha *intencionalmente* em 25% das vezes com um erro inesperado (status code 500). Utilize o parâmetro `stable` na query string para desabilitar isso.",
         "parameters": [
           {
             "name": "channelId",
@@ -121,6 +122,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "stable",
+            "in": "query",
+            "type": "boolean",
+            "default": false,
+            "description": "Envie \"true\" para desabilitar os erros aleatórios. Idealmente esse parâmetro **não** deve ser usado na versão final da sua implementação."
           },
           {
             "name": "body",
@@ -161,12 +169,40 @@
           },
           "404": {
             "$ref": "#/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/responses/InternalError"
           }
         }
       }
     }
   },
   "responses": {
+    "InternalError": {
+      "description": "Houve um erro inesperado",
+      "schema": {
+        "example": {
+          "type": "internal_error",
+          "error": "Unexpected error"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ResponseError"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "internal_error"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
     "UserNotFoundError": {
       "description": "O User informado não existe",
       "schema": {
@@ -349,7 +385,8 @@
           "enum": [
             "channel_not_found",
             "user_not_found",
-            "missing_property"
+            "missing_property",
+            "internal_error"
           ]
         },
         "error": {

@@ -10,6 +10,7 @@
     "faker": "^4.1.0",
     "ramda": "^0.24.1",
     "ramda-fantasy": "^0.8.0",
+    "random-js": "^1.0.8",
     "swagger-express": "^1.0.5",
     "swagger-ui-express": "^2.0.8",
     "titleize": "^1.0.0",
