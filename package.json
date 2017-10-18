@@ -9,6 +9,7 @@
     "cors": "^2.8.4",
     "express": "^4.15.3",
     "faker": "^4.1.0",
+    "morgan": "^1.9.0",
     "ramda": "^0.24.1",
     "ramda-fantasy": "^0.8.0",
     "random-js": "^1.0.8",

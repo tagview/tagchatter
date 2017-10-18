@@ -4,6 +4,7 @@ const successPercentage = parseFloat(process.env.SUCCESS_PERCENTAGE) || 0.75;
 
 const http = require("http");
 const express = require("express");
+const morgan = require("morgan");
 const swaggerUi = require("swagger-ui-express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -64,6 +65,7 @@ const channels = [
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(morgan("combined"));
 
 app.get("/me", (req, res) => res.json(faker.random.arrayElement(users)));
 
