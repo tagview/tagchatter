@@ -10,7 +10,7 @@
   "host": "tagchatter.herokuapp.com",
   "externalDocs": {
     "description": "Instruções",
-    "url": "https://gitlab.com/tagview/entrevista-front-end"
+    "url": "https://github.com/tagview/tagchatter"
   },
   "schemes": [
     "https",
