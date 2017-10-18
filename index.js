@@ -34,26 +34,27 @@ const buildMessage = ({ id, content, author, created_at } = {}) => ({
 });
 
 const users = [
-    "laverne_jacobi11",
-    "noelia_christiansen",
-    "kevin_heaney",
-    "ulises.rath",
-    "mona_mueller",
-    "elinor.klein17",
-    "gunnar_gerhold",
-    "ramona_davis74",
-    "gerald47",
-    "kieran56",
-  ].map(id => buildUser({ id }));
+  "laverne_jacobi11",
+  "noelia_christiansen",
+  "kevin_heaney",
+  "ulises.rath",
+  "mona_mueller",
+  "elinor.klein17",
+  "gunnar_gerhold",
+  "ramona_davis74",
+  "gerald47",
+  "kieran56",
+]
+  .map(id => buildUser({ id }));
 
 const channels = [
-    ["general", "Geral"],
-    ["random", "Random"],
-    ["javascripty", "Javascript"],
-    ["ruby", "Ruby"],
-    ["ajuda", "Ajuda"],
-    ["entrevista", "Entrevista"],
-  ]
+  ["general", "Geral"],
+  ["random", "Random"],
+  ["javascripty", "Javascript"],
+  ["ruby", "Ruby"],
+  ["ajuda", "Ajuda"],
+  ["entrevista", "Entrevista"],
+]
   .map(([id, name]) => ({
     id,
     name,
@@ -105,19 +106,19 @@ app.post("/channels/:id/messages", (req, res) => {
   } else if (isBlank(req.body.message)) {
     res.status(400).json({
       type: "missing_property",
-      error: `Property "message" is required`,
+      error: 'Property "message" is required',
       properties: ["message"],
     });
   } else if (isBlank(req.body.author_id)) {
     res.status(400).json({
       type: "missing_property",
-      error: `Property "author_id" is required`,
+      error: 'Property "author_id" is required',
       properties: ["author_id"],
     });
   } else if (isBlank(user)) {
     res.status(404).json({ type: "user_not_found", error: "User not found", user: userId });
   } else {
-    res.status(404).json({ type: "channel_not_found", error: "Channel not found", channel: id });
+    res.status(404).json({ type: "channel_not_found", error: "Channel not found", channel: channelId });
   }
 });
 
