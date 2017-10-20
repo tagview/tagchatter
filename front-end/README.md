@@ -1,6 +1,6 @@
 # Front-end
 
-A ideia é que você desenvolva uma aplicação web para que os usuários consigam conversar entre si através de grupos (channels). Os dados devem ser obtidos através da [API](#api) e você pode usar o [layout](../layout) como base para a sua implementação.
+A ideia é que você desenvolva uma aplicação web para que os usuários consigam conversar entre si através de grupos (channels). Os dados devem ser obtidos através da [API](#api) e você pode usar o [layout](layout) como base para a sua implementação.
 
 ## Requisitos funcionais
 - A lista de mensagens do Channel que o usuário está visualizando deve ser atualizada a cada 3 segundos
