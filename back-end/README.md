@@ -70,11 +70,15 @@ Retorna uma lista com todas as Messages do Channel especificado.
 - **created_at\*** (data de envio no formato ISO 8601): `string`
 - **author\*** (usuário autor da mensagem): [`User`](#user)
 
-### BadRequestError (status code 400)
+### BadRequestError
+Status code da resposta: 400
+
 - **type\***(`string`): `bad_request`
 - **message\***(`string`): `Parameter "nome do parâmetro" is invalid`
 
-### NotFoundError (status code 404)
+### NotFoundError
+Status code da resposta: 404
+
 - **type\***(`string`): `not_found`
 - **message\***(`string`): `"*nome do Model*" not found`
 
