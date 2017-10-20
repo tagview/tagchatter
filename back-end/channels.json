@@ -1,0 +1,32 @@
+[
+  {
+    "id": "general",
+    "name": "Geral",
+    "public": true
+  },
+  {
+    "id": "random",
+    "name": "Random",
+    "public": true
+  },
+  {
+    "id": "javascripty",
+    "name": "JS",
+    "public": true
+  },
+  {
+    "id": "ruby",
+    "name": "Ruby",
+    "public": true
+  },
+  {
+    "id": "ajuda",
+    "name": "SOS",
+    "public": true
+  },
+  {
+    "id": "entrevista",
+    "name": "Entrevista",
+    "public": true
+  }
+]
