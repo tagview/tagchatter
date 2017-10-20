@@ -10,21 +10,19 @@ Estamos empolgados que você se interessou em fazer parte da equipe Tagview! Mon
 
 A ideia é que você desenvolva uma aplicação web para que os usuários consigam conversar entre si através de grupos (channels). Os dados devem ser obtidos através da [API](#api) e a interface deve seguir o [layout proposto](#layout).
 
-### Requisitos
+### Requisitos funcionais
 - A lista de mensagens do channel que o usuário está visualizando deve ser atualizada a cada 3 segundos
 - Ao acessar um channel o usuário deve visualizar a listagem atualizada de mensagens
 - O request para enviar mensagens (`POST /channels/:channelId/messages`) falha *intencionalmente* com uma probabilidade de 25%, retornando um erro 500. Você pode desabilitar isso passando o parâmetro `stable` mas idealmente a sua implementação deve tratar esses erros aleatórios, permitindo que o usuário tente enviar a mensagem novamente. Consulte [a documentação da API](https://tagchatter.herokuapp.com/docs/#/channel/post_channels__channelId__messages) para mais detalhes.
 
-### Linguagens aceitas
-Você pode usar as bibliotecas e frameworks que preferir desde que a linguagem de programação esteja entre:
-
-- Java
-- Javascript
-- Objective-C
-- PHP
-- Python
-- Ruby
-- Swift
+### Requisitos técnicos
+- Os requests para a API devem ser feitos client-side
+- Você pode usar um dos seguintes frameworks javascript:
+  - [React](https://reactjs.org/)
+  - [Angular](https://angularjs.org/)
+  - [Vue](https://vuejs.org/)
+  - Vanilla (javascript puro)
+- Você pode usar qualquer outra biblioteca adicional que achar necessário
 
 ### API
 Desenvolvemos uma API REST que deve ser usada para obter os dados dos usuários, dos channels e enviar mensagens.
@@ -45,9 +43,9 @@ Nossa análise vai além do resultado final então se você tiver um problema im
 ### Critérios de avaliação
 - Capacidade em assimilar um conteúdo novo
 - Fidelidade ao layout proposto
-- Tratamento de erros
 - Organização do repositório
 - Atenção aos [requisitos](#requisitos)
 - Empenho em entregar algo, mesmo que minimamente funcional
+- Tratamento de erros
 
 Caso tenha dúvidas, envie um e-mail para `team@tagview.com.br`
