@@ -9,8 +9,8 @@ Estamos empolgados que você se interessou em fazer parte da equipe Tagview! Mon
 ## Implementação
 
 O desafio é um web chat onde usuários conseguem conversar entre si através de grupos (channels). Você pode seguir dois caminhos diferentes, escolha o que te interessar mais:
-- [**Implementar o front-end da aplicação**](back-end)
-- [**Implementar o back-end (servidor) da aplicação**](front-end)
+- [**Implementar o back-end (servidor) da aplicação**](back-end)
+- [**Implementar o front-end da aplicação**](front-end)
 
 ## Submissão
 Nos envie o URL de um repositório git público. Usamos bastante do [GitLab](https://gitlab.com) e o [GitHub](https://github.com).
