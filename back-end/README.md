@@ -85,10 +85,10 @@ Status code da resposta: 404
 ## Linguagens aceitas
 Você pode usar as bibliotecas e frameworks que preferir desde que a linguagem de programação esteja entre:
 
-- Java
-- Javascript
-- PHP
-- Python
 - Ruby
+- Javascript
+- Python
+- Java
+- PHP
 
 Se você preferir *não precisa persistir as mensagens ou qualquer outro dado* em um banco de dados, você pode manter as informações em memória.
