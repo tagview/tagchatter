@@ -8,7 +8,7 @@ Retorna uma lista com todos os `Users`.
 
 ### Requisitos:
 
-- A lista de usuários deve ser obtida através da [leitura do arquivo json](#importacao-de-dados)
+- A lista de usuários deve ser obtida através da [leitura do arquivo json](#importação-de-dados)
 - Deve retornar um array de objetos com a estrutura de um [`User`](#user)
 - O atributo `name` deve ser a junção dos valores `first_name` e `last_name` importados
 - A lista deve estar em ordem alfabética de `name`
@@ -19,7 +19,7 @@ Retorna uma lista com todos os `Channels`.
 
 ### Requisitos:
 
-- A lista de channels deve ser obtida através da [leitura do arquivo json](#importacao-de-dados)
+- A lista de channels deve ser obtida através da [leitura do arquivo json](#importação-de-dados)
 - Deve retornar um array de objetos com a estrutura de um [`Channel`](#channel)
 - A lista deve estar em ordem alfabética de `name`
 
