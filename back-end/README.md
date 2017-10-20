@@ -8,8 +8,9 @@ Retorna uma lista com todos os `Users`.
 
 ### Requisitos:
 
-- Deve ler [`users.json`](users.json) e retornar um array de objetos com a estrutura de um [`User`](#user)
-- O atributo `name` deve ser a junção dos valores `first_name` e `last_name`
+- A lista de usuários deve ser obtida através da [leitura do arquivo json](#importacao-de-dados)
+- Deve retornar um array de objetos com a estrutura de um [`User`](#user)
+- O atributo `name` deve ser a junção dos valores `first_name` e `last_name` importados
 - A lista deve estar em ordem alfabética de `name`
 
 ## `GET /channels`
@@ -18,7 +19,8 @@ Retorna uma lista com todos os `Channels`.
 
 ### Requisitos:
 
-- Deve ler [`channels.json`](channels.json) e retornar um array de objetos com a estrutura de um [`Channel`](#channel)
+- A lista de channels deve ser obtida através da [leitura do arquivo json](#importacao-de-dados)
+- Deve retornar um array de objetos com a estrutura de um [`Channel`](#channel)
 - A lista deve estar em ordem alfabética de `name`
 
 ## `POST /channels/:channelId/messages`
@@ -85,10 +87,15 @@ Status code da resposta: 404
 ## Linguagens aceitas
 Você pode usar as bibliotecas e frameworks que preferir desde que a linguagem de programação esteja entre:
 
-- Ruby
-- Javascript
-- Python
 - Java
+- Javascript
 - PHP
+- Python
+- Ruby
 
 Se você preferir *não precisa persistir as mensagens ou qualquer outro dado* em um banco de dados, você pode manter as informações em memória.
+
+## Importação de dados
+
+A sua implementação deve obter os dados de usuários e channels através da leitura dos arquivos [`channels.json`](channels.json) e [`users.json`](users.json), essa leitura pode ser feita durante a inicialização do seu servidor ou, caso esteja usando um banco de dados, você pode fazer um script que popula o banco com esses itens. 
+Ou seja, os arquivos `json` devem ser lidos do disco e carregados em sua aplicação.
