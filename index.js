@@ -63,6 +63,13 @@ const channels = [
       .sort((a, b) => b.created_at - a.created_at),
   }));
 
+setInterval(() => {
+  const author = faker.random.arrayElement(users);
+  const message = buildMessage({ author, created_at: new Date() });
+  const channel = faker.random.arrayElement(channels);
+  channel.messages = takeLast(200, [...channel.messages, message]);
+}, 200);
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan("combined"));
