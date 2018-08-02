@@ -13,7 +13,7 @@ O desafio é um web chat onde usuários conseguem conversar entre si através de
 - [**Implementar o front-end da aplicação**](front-end)
 
 ## Submissão
-Nos envie o URL de um repositório git público. Usamos bastante do [GitLab](https://gitlab.com) e o [GitHub](https://github.com).
+Envie o URL de um repositório git público para `team@tagview.com.br`. Usamos bastante do [GitLab](https://gitlab.com) e o [GitHub](https://github.com).
 
 :warning: **Não esqueça de adicionar as instruções de como executar o seu projeto**
 
