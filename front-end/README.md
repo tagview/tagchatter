@@ -20,3 +20,6 @@ A ideia é que você desenvolva uma aplicação web para que os usuários consig
 Desenvolvemos uma API REST que deve ser usada para obter os dados dos usuários, dos channels e enviar mensagens.
 
 Você pode acessar as informações detalhadas e testar os endpoints acessando [tagchatter.herokuapp.com/docs](https://tagchatter.herokuapp.com/docs/)
+
+## Como envio o meu desafio?
+Veja mais detalhes na [seção de subimissão](https://github.com/tagview/tagchatter/blob/master/README.md#submiss%C3%A3o)
