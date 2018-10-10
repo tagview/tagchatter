@@ -19,9 +19,6 @@
   "tags": [
     {
       "name": "user"
-    },
-    {
-      "name": "channel"
     }
   ],
   "paths": {
@@ -60,40 +57,12 @@
         }
       }
     },
-    "/channels": {
+    "/messages": {
       "get": {
         "tags": [
-          "channel"
+          "message"
         ],
-        "summary": "Retorna uma lista com todos os Channels",
-        "responses": {
-          "200": {
-            "description": "Operação bem sucedida",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Channel"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/channels/{channelId}/messages": {
-      "get": {
-        "tags": [
-          "channel"
-        ],
-        "summary": "Retorna uma lista com todas as Messages do Channel especificado, em ordem crescente de data de criação",
-        "parameters": [
-          {
-            "name": "channelId",
-            "description": "ID do Channel",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "summary": "Retorna uma lista com todas as 200 últimas Messages, em ordem crescente de data de criação",
         "responses": {
           "200": {
             "description": "Operação bem sucedida",
@@ -103,26 +72,16 @@
                 "$ref": "#/definitions/Message"
               }
             }
-          },
-          "404": {
-            "$ref": "#/responses/NotFoundError"
           }
         }
       },
       "post": {
         "tags": [
-          "channel"
+          "message"
         ],
-        "summary": "Envia uma Message para o Channel especificado",
+        "summary": "Envia uma Message",
         "description": "## ATENÇÃO: Esse request falha *intencionalmente* em 25% das vezes com um erro inesperado (status code 500). Utilize o parâmetro `stable` na query string para desabilitar isso.",
         "parameters": [
-          {
-            "name": "channelId",
-            "description": "ID do Channel",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "stable",
             "in": "query",
@@ -168,10 +127,56 @@
             "$ref": "#/responses/MissingPropertyError"
           },
           "404": {
-            "$ref": "#/responses/NotFoundError"
+            "$ref": "#/responses/UserNotFoundError"
           },
           "500": {
             "$ref": "#/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/messages/:id/parrot": {
+      "put": {
+        "tags": [
+          "message",
+          "parrot"
+        ],
+        "summary": "Marca uma Message como parrot",
+        "parameters": [
+          {
+            "name": "messageId",
+            "description": "ID da Message",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem sucedida",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/MessageNotFoundError"
+          }
+        }
+      }
+    },
+    "/messages/parrots-count": {
+      "get": {
+        "tags": [
+          "message",
+          "parrot"
+        ],
+        "summary": "Retorna a contagem de mensagens marcadas como parrot",
+        "responses": {
+          "200": {
+            "description": "Operação bem sucedida",
+            "schema": {
+              "type": "integer"
+            }
           }
         }
       }
@@ -236,12 +241,13 @@
         ]
       }
     },
-    "NotFoundError": {
-      "description": "Não encontrado",
+    "MessageNotFoundError": {
+      "description": "A Message informada não existe",
       "schema": {
         "example": {
-          "type": "channel_not_found",
-          "error": "Channel not found"
+          "type": "message_not_found",
+          "error": "Message not found",
+          "message": "invalid_id"
         },
         "allOf": [
           {
@@ -253,8 +259,40 @@
               "type": {
                 "type": "string",
                 "enum": [
-                  "channel_not_found",
-                  "user_not_found"
+                  "message_not_found"
+                ]
+              },
+              "message": {
+                "description": "ID da Message não encontrada",
+                "type": "string"
+              }
+            },
+            "required": [
+              "message"
+            ]
+          }
+        ]
+      }
+    },
+    "NotFoundError": {
+      "description": "Não encontrado",
+      "schema": {
+        "example": {
+          "type": "user_not_found",
+          "error": "User not found"
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ResponseError"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "user_not_found",
+                  "message_not_found"
                 ]
               }
             }
@@ -327,26 +365,6 @@
         "avatar": "https://example.com/us3r.jpg"
       }
     },
-    "Channel": {
-      "description": "Um grupo de Users",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "name"
-      ],
-      "example": {
-        "id": "ch4nn3l",
-        "name": "VIP"
-      }
-    },
     "Message": {
       "type": "object",
       "properties": {
@@ -355,6 +373,10 @@
         },
         "content": {
           "type": "string"
+        },
+        "has_parrot": {
+          "type": "boolean",
+          "description": "Se a mensagem foi marcada como parrot"
         },
         "created_at": {
           "type": "string",
@@ -368,12 +390,14 @@
         "id",
         "content",
         "created_at",
+        "has_parrot",
         "author"
       ],
       "example": {
         "id": "m3ss4g3",
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
         "created_at": "2017-10-17T12:09:07.997Z",
+        "has_parrot": false,
         "author": {
           "id": "us3r",
           "name": "John Doe",
@@ -389,8 +413,8 @@
           "description": "O identificador do erro",
           "type": "string",
           "enum": [
-            "channel_not_found",
             "user_not_found",
+            "message_not_found",
             "missing_property",
             "internal_error"
           ]

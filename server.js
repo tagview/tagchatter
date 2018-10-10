@@ -1,4 +1,6 @@
 const port = process.env.PORT || 3000;
+const polling_interval = (process.env.POLLING_INTERVAL && parseInt(process.env.POLLING_INTERVAL)) || 2000;
+const messages_limit = (process.env.MESSAGES_LIMIT && parseInt(process.env.MESSAGES_LIMIT)) || 200;
 const apiDocs = require("./swagger.json");
 const successPercentage = parseFloat(process.env.SUCCESS_PERCENTAGE) || 0.75;
 
@@ -9,7 +11,7 @@ const swaggerUi = require("swagger-ui-express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const uuid = require("uuid/v4");
-const { all, isNil, isEmpty, pick, prop, propEq, takeLast, times } = require("ramda");
+const { all, isNil, isEmpty, pick, prop, propEq, takeLast, times, merge } = require("ramda");
 const { Maybe } = require("ramda-fantasy");
 const faker = require("faker");
 const titleize = require("titleize");
@@ -27,11 +29,12 @@ const buildUser = ({ id, name, avatar } = {}) => ({
   avatar: avatar || faker.image.avatar(),
 });
 
-const buildMessage = ({ id, content, author, created_at } = {}) => ({
+const buildMessage = ({ id, content, author, created_at, has_parrot } = {}) => ({
   id: isPresent(id) ? toId(id) : uuid(),
   content: content || faker.hacker.phrase(),
   author: buildUser(author),
   created_at: created_at || faker.date.past(),
+  has_parrot: isPresent(has_parrot) ? has_parrot : false,
 });
 
 const users = [
@@ -48,27 +51,14 @@ const users = [
 ]
   .map(id => buildUser({ id }));
 
-const channels = [
-  ["general", "Geral"],
-  ["random", "Random"],
-  ["javascripty", "Javascript"],
-  ["ruby", "Ruby"],
-  ["ajuda", "Ajuda"],
-  ["entrevista", "Entrevista"],
-]
-  .map(([id, name]) => ({
-    id,
-    name,
-    messages: times(() => buildMessage({ author: faker.random.arrayElement(users) }), 5)
-      .sort((a, b) => b.created_at - a.created_at),
-  }));
+let messages = times(() => buildMessage({ author: faker.random.arrayElement(users) }), 5)
+  .sort((a, b) => b.created_at - a.created_at);
 
 setInterval(() => {
   const author = faker.random.arrayElement(users);
   const message = buildMessage({ author, created_at: new Date() });
-  const channel = faker.random.arrayElement(channels);
-  channel.messages = takeLast(200, [...channel.messages, message]);
-}, 200);
+  messages = takeLast(messages_limit, [...messages, message]);
+}, polling_interval);
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -78,36 +68,21 @@ app.get("/me", (req, res) => res.json(faker.random.arrayElement(users)));
 
 app.get("/users", (req, res) => res.json(users));
 
-app.get("/channels", (req, res) =>
-  res.json(channels.map(pick(["id", "name"]))));
-
-app.get("/channels/:id/messages", (req, res) => {
+app.get("/messages", (req, res) => {
   const id = toId(req.params.id);
 
-  const [status, body] = Maybe(channels.find(propEq("id", id)))
-    .map(prop("messages"))
-    .map(takeLast(50))
-    .map(messages => [200, messages])
-    .getOrElse([404, {
-      type: "channel_not_found",
-      error: "Channel not found",
-      channel: id,
-    }]);
-
-  res.status(status).json(body);
+  res.status(200).json(takeLast(messages_limit, messages));
 });
 
-app.post("/channels/:id/messages", (req, res) => {
-  const channelId = toId(req.params.id);
+app.post("/messages", (req, res) => {
   const userId = toId(req.body.author_id);
-  const channel = channels.find(propEq("id", channelId));
   const user = users.find(propEq("id", userId));
   const shouldSucceed = /true/i.test(req.query.stable) || random.bool(successPercentage)(random.engines.nativeMath)
 
-  if (all(isPresent, [channel, user, req.body.message])) {
+  if (all(isPresent, [user, req.body.message])) {
     if (shouldSucceed) {
       const message = buildMessage({ content: req.body.message, author: user, created_at: new Date() });
-      channel.messages.push(message);
+      messages.push(message);
       res.json(message);
     } else {
       res.status(500).json({ type: "internal_error", error: "Unexpected error" });
@@ -126,9 +101,28 @@ app.post("/channels/:id/messages", (req, res) => {
     });
   } else if (isBlank(user)) {
     res.status(404).json({ type: "user_not_found", error: "User not found", user: userId });
-  } else {
-    res.status(404).json({ type: "channel_not_found", error: "Channel not found", channel: channelId });
   }
+});
+
+app.put("/messages/:id/parrot", (req, res) => {
+  const id = toId(req.params.id);
+  const message = messages.find(propEq("id", id));
+
+  if (isPresent(message)) {
+    const messageWithParrot = buildMessage(merge(message, { has_parrot: true}));
+
+    messages = messages.map(message => message.id == id ? messageWithParrot : message);
+
+    res.json(messageWithParrot);
+  } else {
+    res.status(404).json({ type: "message_not_found", error: "Message not found", message: id });
+  }
+});
+
+app.get("/messages/parrots-count", (req, res) => {
+  const parrotsCount = messages.reduce((count, message) => message.has_parrot ? count + 1 : count, 0);
+
+  res.json(parrotsCount);
 });
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(apiDocs));
