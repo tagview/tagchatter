@@ -43,7 +43,7 @@ Adicionalmente você pode implementar o `unparrot` de mensagens, quando o usuár
 - *As requisições para a API devem ser feitas client-side*. **Não** queremos que você divida a sua aplicação em várias páginas.
 
 ## Submissão
-Envie o URL de um repositório git público para `team@tagview.com.br`. Usamos bastante do [GitLab](https://gitlab.com) e o [GitHub](https://github.com).
+Envie o URL de um repositório git público para `team@tagview.com.br`. Usamos bastante o [GitLab](https://gitlab.com) e o [GitHub](https://github.com).
 
 ## Boa sorte!
 Nossa análise vai além do resultado final então se você tiver um problema implementando algum detalhe nos envie a sua solução mesmo assim.
