@@ -1,5 +1,5 @@
-(function($) {
   var apiUrl = "https://tagchatter.herokuapp.com";
+(function() {
 
   function fetchParrotsCount() {
     return fetch(apiUrl + "/messages/parrots-count")
@@ -7,7 +7,7 @@
         return response.json();
       })
       .then(function(count) {
-        $("#parrots-counter").text(count);
+        document.getElementById("parrots-counter").innerHTML = count;
       });
   }
 
@@ -38,4 +38,4 @@
   }
 
   initialize();
-})(window.jQuery);
+})();

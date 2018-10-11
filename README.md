@@ -32,8 +32,8 @@ Você pode visualizar detalhes do layout [clicando aqui](https://www.figma.com/f
 
 ### Requisitos adicionais
 - Você pode continuar a implementação sem nenhum framework ou utilizar AngularJS, ReactJS ou VueJS
-- Você pode utilizar qualquer outra biblioteca adicional que achar necessário
 - *Os requests para a API devem ser feitos client-side*. **Não** queremos que você divida a sua aplicação em várias páginas, seguindo a estrutura Model View Controller.
+- Você pode utilizar qualquer outra biblioteca adicional que achar necessário (jQuery, por exemplo)
 
 ## Submissão
 Envie o URL de um repositório git público para `team@tagview.com.br`. Usamos bastante do [GitLab](https://gitlab.com) e o [GitHub](https://github.com).
