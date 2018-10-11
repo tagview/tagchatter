@@ -1,6 +1,4 @@
-  var apiUrl = "https://tagchatter.herokuapp.com";
-(function() {
-
+(function(apiUrl) {
   function fetchParrotsCount() {
     return fetch(apiUrl + "/messages/parrots-count")
       .then(function(response) {
@@ -38,4 +36,4 @@
   }
 
   initialize();
-})();
+})("https://tagchatter.herokuapp.com");
