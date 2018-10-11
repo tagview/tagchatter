@@ -1,0 +1,52 @@
+html {
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  min-height: 100%;
+}
+
+.content {
+  flex: 1;
+}
+
+.sidebar {
+  width: 80px;
+  background-color: #25272E;
+}
+
+.sidebar__logo::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  display: block;
+  background-color: #1D2028;
+  border-bottom: 1px solid #31343C;
+}
+
+.header {
+  height: 82px;
+  border-bottom: 1px solid #EEEEEE;
+  padding: 16px 22px;
+  color: #626262;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 36px;
+}
+
+.header__parrots-count {
+  display: flex;
+}
+
+.header__parrots-count::before {
+  content: url('images/light-parrot.svg');
+  align-self: center;
+  margin-right: 10px;
+}
