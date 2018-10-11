@@ -25,9 +25,9 @@ Você pode visualizar detalhes do layout [clicando aqui](https://www.figma.com/f
 1. Deve ser feito um request para `/me` onde serão obtidos os dados necessários para exibir a imagem do usuário e o seu ID, utilizado no envio de mensagem
 2. A lista de mensagens deve ser atualizada a cada 3 segundos
 3. Ao clicar no ícone ![papagaio](parrot.gif) deve-se:
-  1. Fazer um request para `PUT /messages/:messageId/parrot`
-  2. Destacar a mensagem na interface, seguindo o layout
-  3. Incrementar o contador
+   - Fazer um request para `PUT /messages/:messageId/parrot`
+   - Destacar a mensagem na interface, seguindo o layout
+   - Incrementar o contador
 4. Ao clicar no botão enviar, ao lado do campo de texto, deve-se fazer um request para `POST /messages` e adicionar a nova mensagem na lista exibida
 5. O request para enviar mensagens (`POST /messages`) falha *intencionalmente* com uma probabilidade de 25%, retornando um erro 500. Idealmente a sua implementação deve tratar esses erros aleatórios, exibindo um `alert` (ou outro componente na interface) e permitindo que o usuário tente enviar a mensagem novamente mas você pode desabilitar os erros passando o parâmetro `stable`. Consulte [a documentação da API](https://tagchatter.herokuapp.com/docs/#/message/post__messages) para mais detalhes.
 
