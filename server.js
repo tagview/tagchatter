@@ -1,10 +1,3 @@
-const port = process.env.PORT || 3000;
-const parseInt10 = string => parseInt(string, 10);
-const pollingInterval = (process.env.POLLING_INTERVAL && parseInt10(process.env.POLLING_INTERVAL)) || 2000;
-const messagesLimit = (process.env.MESSAGES_LIMIT && parseInt10(process.env.MESSAGES_LIMIT)) || 200;
-const apiDocs = require("./swagger.json");
-const successPercentage = parseFloat(process.env.SUCCESS_PERCENTAGE) || 0.75;
-
 const http = require("http");
 const express = require("express");
 const morgan = require("morgan");
@@ -17,6 +10,13 @@ const { Maybe } = require("ramda-fantasy");
 const faker = require("faker");
 const titleize = require("titleize");
 const random = require("random-js");
+
+const port = process.env.PORT || 3000;
+const parseInt10 = string => parseInt(string, 10);
+const pollingInterval = Maybe(process.env.POLLING_INTERVAL).map(parseInt10).getOrElse(2000);
+const messagesLimit = Maybe(process.env.MESSAGES_LIMIT).map(parseInt10).getOrElse(200);
+const successPercentage = Maybe(process.env.SUCCESS_PERCENTAGE).map(parseFloat).getOrElse(0.75);
+const apiDocs = require("./swagger.json");
 
 const isPresent = val => !isNil(val) && !isEmpty(val);
 const isBlank = val => !isPresent(val);
