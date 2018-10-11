@@ -1,6 +1,7 @@
 const port = process.env.PORT || 3000;
-const pollingInterval = (process.env.pollingInterval && parseInt(process.env.pollingInterval, 10)) || 2000;
-const messagesLimit = (process.env.messagesLimit && parseInt(process.env.messagesLimit, 10)) || 200;
+const parseInt10 = string => parseInt(string, 10);
+const pollingInterval = (process.env.pollingInterval && parseInt10(process.env.pollingInterval)) || 2000;
+const messagesLimit = (process.env.messagesLimit && parseInt10(process.env.messagesLimit)) || 200;
 const apiDocs = require("./swagger.json");
 const successPercentage = parseFloat(process.env.SUCCESS_PERCENTAGE) || 0.75;
 
