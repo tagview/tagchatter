@@ -19,7 +19,7 @@ Desenvolvemos uma API REST que deve ser usada para obter os dados dos usuários 
 Você pode acessar as informações detalhadas e testar os endpoints acessando [tagchatter.herokuapp.com/docs](https://tagchatter.herokuapp.com/docs/)
 
 ### Layout
-Você pode visualizar detalhes do layout [clicando aqui](https://www.figma.com/file/Zhyvatv2GVFm4UcKQlRE4Szs/tagchatter?node-id=0%3A28). Ao criar uma conta no Figma você conseguirá visualizar as medidas e baixar os ícones necessários.
+Você pode visualizar detalhes do layout [clicando aqui](https://www.figma.com/file/Zhyvatv2GVFm4UcKQlRE4Szs/tagchatter?node-id=0%3A2). Ao criar uma conta no Figma você conseguirá visualizar as medidas e baixar os ícones necessários.
 
 ### Requisitos funcionais
 1. A lista de mensagens deve ser atualizada a cada 3 segundos
@@ -48,6 +48,4 @@ Nossa análise vai além do resultado final então se você tiver um problema im
 - Empenho em entregar algo, mesmo que minimamente funcional
 - Tratamento de erros
 
-Caso tenha dúvidas, envie um e-mail para `team@tagview.com.br`
-
-:man_technologist:
+Caso tenha dúvidas, envie um e-mail para `team@tagview.com.br` :man_technologist:
