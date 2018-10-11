@@ -1,6 +1,6 @@
 const port = process.env.PORT || 3000;
-const polling_interval = (process.env.POLLING_INTERVAL && parseInt(process.env.POLLING_INTERVAL)) || 2000;
-const messages_limit = (process.env.MESSAGES_LIMIT && parseInt(process.env.MESSAGES_LIMIT)) || 200;
+const pollingInterval = (process.env.pollingInterval && parseInt(process.env.pollingInterval, 10)) || 2000;
+const messagesLimit = (process.env.messagesLimit && parseInt(process.env.messagesLimit, 10)) || 200;
 const apiDocs = require("./swagger.json");
 const successPercentage = parseFloat(process.env.SUCCESS_PERCENTAGE) || 0.75;
 
@@ -57,8 +57,8 @@ let messages = times(() => buildMessage({ author: faker.random.arrayElement(user
 setInterval(() => {
   const author = faker.random.arrayElement(users);
   const message = buildMessage({ author, created_at: new Date() });
-  messages = takeLast(messages_limit, [...messages, message]);
-}, polling_interval);
+  messages = takeLast(messagesLimit, [...messages, message]);
+}, pollingInterval);
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -71,7 +71,7 @@ app.get("/users", (req, res) => res.json(users));
 app.get("/messages", (req, res) => {
   const id = toId(req.params.id);
 
-  res.status(200).json(takeLast(messages_limit, messages));
+  res.status(200).json(takeLast(messagesLimit, messages));
 });
 
 app.post("/messages", (req, res) => {
@@ -111,7 +111,7 @@ app.put("/messages/:id/parrot", (req, res) => {
   if (isPresent(message)) {
     const messageWithParrot = buildMessage(merge(message, { has_parrot: true}));
 
-    messages = messages.map(message => message.id == id ? messageWithParrot : message);
+    messages = messages.map(message => message.id === id ? messageWithParrot : message);
 
     res.json(messageWithParrot);
   } else {
@@ -120,7 +120,7 @@ app.put("/messages/:id/parrot", (req, res) => {
 });
 
 app.get("/messages/parrots-count", (req, res) => {
-  const parrotsCount = messages.reduce((count, message) => message.has_parrot ? count + 1 : count, 0);
+  const parrotsCount = messages.filter(propEq("has_parrot", true)).length;
 
   res.json(parrotsCount);
 });
