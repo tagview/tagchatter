@@ -125,11 +125,11 @@ app.put("/messages/:id/unparrot", (req, res) => {
   const message = messages.find(propEq("id", id));
 
   if (isPresent(message)) {
-    const messageWithoutParrot = buildMessage(merge(message, { has_parrot: false}));
+    const messageWithoutParrot = buildMessage(merge(message, { has_parrot: false }));
 
-    messages = messages.map(message => message.id === id ? messageWithParrot : message);
+    messages = messages.map(message => message.id === id ? messageWithoutParrot : message);
 
-    res.json(messageWithParrot);
+    res.json(messageWithoutParrot);
   } else {
     res.status(404).json({ type: "message_not_found", error: "Message not found", message: id });
   }
