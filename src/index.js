@@ -24,7 +24,7 @@
 
   function sendMessage(message, authorId) {
     // Manda a mensagem para a API quando o usuário envia a mensagem
-    // Caso o request falhe chama Window.alert para exibir uma mensagem para o usuário
+    // Caso o request falhe exibe uma mensagem para o usuário utilizando Window.alert ou outro componente visual
     // Se o request for bem sucedido, atualiza o conteúdo da lista de mensagens
   }
 
