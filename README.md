@@ -19,9 +19,9 @@ Desenvolvemos uma API REST que deve ser usada para obter os dados dos usuários 
 Você pode acessar as informações detalhadas e testar os endpoints acessando [tagchatter.herokuapp.com/docs](https://tagchatter.herokuapp.com/docs/)
 
 ### Layout
-Você pode visualizar detalhes do layout [clicando aqui](https://www.figma.com/file/Zhyvatv2GVFm4UcKQlRE4Szs/tagchatter?node-id=0%3A2). Ao criar uma conta no Figma você conseguirá visualizar as medidas e baixar os ícones necessários.
+Você pode visualizar detalhes do layout [clicando aqui](https://www.figma.com/file/Zhyvatv2GVFm4UcKQlRE4Szs/tagchatter?node-id=0%3A1). Ao criar uma conta no Figma você conseguirá visualizar as medidas e baixar os ícones necessários.
 
-### Requisitos funcionais
+### Requisitos técnicos
 1. A lista de mensagens deve ser atualizada a cada 3 segundos
 2. Ao clicar no ícone ![papagaio](parrot.gif) deve-se:
   1. Fazer um request para `PUT /messages/:messageId/parrot`
@@ -30,7 +30,7 @@ Você pode visualizar detalhes do layout [clicando aqui](https://www.figma.com/f
 3. Ao clicar no botão enviar, ao lado do campo de texto, deve-se fazer um request para `POST /messages` e adicionar a nova mensagem na lista exibida
 4. O request para enviar mensagens (`POST /messages`) falha *intencionalmente* com uma probabilidade de 25%, retornando um erro 500. Idealmente a sua implementação deve tratar esses erros aleatórios, exibindo um `alert` e permitindo que o usuário tente enviar a mensagem novamente mas você pode desabilitar os erros passando o parâmetro `stable`. Consulte [a documentação da API](https://tagchatter.herokuapp.com/docs/#/message/post__messages) para mais detalhes.
 
-### Requisitos técnicos
+### Requisitos adicionais
 - Você pode continuar a implementação sem nenhum framework ou utilizar AngularJS, ReactJS ou VueJS
 - Você pode utilizar qualquer outra biblioteca adicional que achar necessário
 - *Os requests para a API devem ser feitos client-side*. **Não** queremos que você divida a sua aplicação em várias páginas, seguindo a estrutura Model View Controller.
