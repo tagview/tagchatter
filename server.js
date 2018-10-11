@@ -30,7 +30,7 @@ const buildUser = ({ id, name, avatar } = {}) => {
   return {
     id: userId,
     name: name || titleize(faker.fake("{{hacker.adjective}} {{name.firstName}}")),
-    avatar: avatar || `https://robohash.org/size_100x100/${userId}.png`,
+    avatar: avatar || `https://robohash.org/bgset_any/size_100x100/${userId}.png`,
   };
 };
 
