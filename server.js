@@ -1,7 +1,7 @@
 const port = process.env.PORT || 3000;
 const parseInt10 = string => parseInt(string, 10);
-const pollingInterval = (process.env.pollingInterval && parseInt10(process.env.pollingInterval)) || 2000;
-const messagesLimit = (process.env.messagesLimit && parseInt10(process.env.messagesLimit)) || 200;
+const pollingInterval = (process.env.POLLING_INTERVAL && parseInt10(process.env.POLLING_INTERVAL)) || 2000;
+const messagesLimit = (process.env.MESSAGES_LIMIT && parseInt10(process.env.MESSAGES_LIMIT)) || 200;
 const apiDocs = require("./swagger.json");
 const successPercentage = parseFloat(process.env.SUCCESS_PERCENTAGE) || 0.75;
 
@@ -110,7 +110,7 @@ app.put("/messages/:id/parrot", (req, res) => {
   const message = messages.find(propEq("id", id));
 
   if (isPresent(message)) {
-    const messageWithParrot = buildMessage(merge(message, { has_parrot: true}));
+    const messageWithParrot = buildMessage(merge(message, { has_parrot: true }));
 
     messages = messages.map(message => message.id === id ? messageWithParrot : message);
 
