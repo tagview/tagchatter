@@ -24,11 +24,15 @@ const toId = id => String(id);
 
 const app = express();
 
-const buildUser = ({ id, name, avatar } = {}) => ({
-  id: isPresent(id) ? toId(id) : uuid(),
-  name: name || titleize(faker.fake("{{hacker.adjective}} {{name.firstName}}")),
-  avatar: avatar || faker.image.avatar(),
-});
+const buildUser = ({ id, name, avatar } = {}) => {
+  const userId = isPresent(id) ? toId(id) : uuid();
+
+  return {
+    id: userId,
+    name: name || titleize(faker.fake("{{hacker.adjective}} {{name.firstName}}")),
+    avatar: avatar || `https://robohash.org/size_100x100/${userId}.png`,
+  };
+};
 
 const buildMessage = ({ id, content, author, created_at, has_parrot } = {}) => ({
   id: isPresent(id) ? toId(id) : uuid(),
