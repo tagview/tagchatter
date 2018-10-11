@@ -119,6 +119,21 @@ app.put("/messages/:id/parrot", (req, res) => {
   }
 });
 
+app.put("/messages/:id/unparrot", (req, res) => {
+  const id = toId(req.params.id);
+  const message = messages.find(propEq("id", id));
+
+  if (isPresent(message)) {
+    const messageWithoutParrot = buildMessage(merge(message, { has_parrot: false}));
+
+    messages = messages.map(message => message.id === id ? messageWithParrot : message);
+
+    res.json(messageWithParrot);
+  } else {
+    res.status(404).json({ type: "message_not_found", error: "Message not found", message: id });
+  }
+});
+
 app.get("/messages/parrots-count", (req, res) => {
   const parrotsCount = messages.filter(propEq("has_parrot", true)).length;
 

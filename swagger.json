@@ -164,6 +164,35 @@
         }
       }
     },
+    "/messages/:id/unparrot": {
+      "put": {
+        "tags": [
+          "message",
+          "parrot"
+        ],
+        "summary": "Desmarca uma Message marcada como parrot",
+        "parameters": [
+          {
+            "name": "messageId",
+            "description": "ID da Message",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem sucedida",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/MessageNotFoundError"
+          }
+        }
+      }
+    },
     "/messages/parrots-count": {
       "get": {
         "tags": [
