@@ -135,7 +135,7 @@
         }
       }
     },
-    "/messages/:id/parrot": {
+    "/messages/{messageId}/parrot": {
       "put": {
         "tags": [
           "message",
@@ -164,7 +164,7 @@
         }
       }
     },
-    "/messages/:id/unparrot": {
+    "/messages/{messageId}/unparrot": {
       "put": {
         "tags": [
           "message",
